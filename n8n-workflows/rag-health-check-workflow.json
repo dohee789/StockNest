@@ -1,0 +1,94 @@
+{
+  "name": "RAG 헬스 체크 및 자동 복구",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule-hourly",
+      "name": "매시간 체크",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://host.docker.internal:8090/api/n8n/health",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "http-health",
+      "name": "서버 상태 확인",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "rag-check",
+              "leftValue": "={{ $json.ragReady }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-rag-down",
+      "name": "RAG 비활성?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8090/api/n8n/rag/refresh",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "http-refresh",
+      "name": "RAG 새로고침",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [950, 200]
+    }
+  ],
+  "connections": {
+    "매시간 체크": {
+      "main": [
+        [{ "node": "서버 상태 확인", "type": "main", "index": 0 }]
+      ]
+    },
+    "서버 상태 확인": {
+      "main": [
+        [{ "node": "RAG 비활성?", "type": "main", "index": 0 }]
+      ]
+    },
+    "RAG 비활성?": {
+      "main": [
+        [{ "node": "RAG 새로고침", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "timezone": "Asia/Seoul"
+  }
+}

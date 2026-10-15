@@ -1,0 +1,142 @@
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    border: 1px solid var(--border-subtle);
+    transition: all var(--duration-normal) var(--ease-spring);
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.card:active {
+    transform: scale(0.97);
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.stockInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.code {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.miniChart {
+    height: 36px;
+    width: auto;
+    max-width: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    opacity: 0.85;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.priceInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.change {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.diff {
+    font-size: 11px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.rise .price { color: var(--rise); }
+.rise .change { color: var(--rise); }
+.rise .diff { color: var(--rise); }
+
+.fall .price { color: var(--fall); }
+.fall .change { color: var(--fall); }
+.fall .diff { color: var(--fall); }
+
+.flat .price { color: var(--text-primary); }
+.flat .change { color: var(--text-secondary); }
+.flat .diff { color: var(--text-secondary); }
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.chevron {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.removeBtn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition: all var(--duration-normal) var(--ease-spring);
+    flex-shrink: 0;
+}
+
+.removeBtn:hover {
+    background: var(--rise-bg);
+    color: var(--rise);
+}
+
+.removeBtn:active {
+    transform: scale(0.85);
+}

@@ -1,0 +1,231 @@
+.page {
+    padding-bottom: 12px;
+}
+
+.header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+/* ── 기간 필터 ── */
+.periodRow {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.periodBtn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.periodBtn:hover { border-color: var(--accent); }
+
+.activePeriod {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ── 요약 카드 ── */
+.summaryCard {
+    margin: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    position: relative;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.summaryRow:last-of-type { margin-bottom: 0; }
+
+.summaryLabel {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.summaryValue {
+    font-size: 14px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+.summaryMain {
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 8px 0;
+}
+
+.summaryCount {
+    position: absolute;
+    top: 14px;
+    right: 52px;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: none;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 유형 필터 ── */
+.filters {
+    padding: 0 16px 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.filterBtn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.filterBtn:hover {
+    border-color: var(--accent);
+}
+
+.activeFilter {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.list {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.historyCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    border: 1px solid var(--border-subtle);
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.historyCard:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.typeIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.buyIcon {
+    background: var(--fall-bg);
+    color: var(--fall);
+}
+
+.sellIcon {
+    background: var(--rise-bg);
+    color: var(--rise);
+}
+
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.infoTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+}
+
+.stockName {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+}
+
+.stockCode {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 1px;
+    font-variant-numeric: tabular-nums;
+}
+
+.totalPrice {
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.buyColor { color: var(--fall); }
+.sellColor { color: var(--rise); }
+
+.infoBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoBottom span {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.time {
+    font-size: 11px !important;
+}
+
+.loading, .empty, .notLogin {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+}

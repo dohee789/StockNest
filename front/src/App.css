@@ -1,0 +1,43 @@
+/* ── 모바일 기본 레이아웃 ── */
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background: var(--bg-primary);
+}
+
+.contentWrapper {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.pageContent {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: calc(var(--bottom-nav-height) + 8px);
+    min-width: 0;
+}
+
+/* ── 데스크탑 레이아웃 (768px+) ── */
+@media (min-width: 768px) {
+    .appContainer {
+        max-width: 100%;
+    }
+
+    .contentWrapper {
+        position: relative;
+    }
+
+    .pageContent {
+        padding-bottom: 24px;
+        padding-left: 0;
+    }
+}
+
+/* ── 넓은 데스크탑 (1200px+) ── */
+@media (min-width: 1200px) {
+    .pageContent {
+        max-width: 1100px;
+    }
+}

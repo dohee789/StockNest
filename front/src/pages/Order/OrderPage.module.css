@@ -1,0 +1,579 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.tabBtn {
+    flex: 1;
+    padding: 14px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    border-bottom: 2px solid transparent;
+}
+
+.tabBuy {
+    color: var(--rise);
+    border-bottom-color: var(--rise);
+}
+
+.tabSell {
+    color: var(--fall);
+    border-bottom-color: var(--fall);
+}
+
+/* ── 주문 유형 바 ── */
+.modeBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    gap: 8px;
+}
+
+.modeBtns {
+    display: flex;
+    gap: 6px;
+}
+
+.modeBtn {
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.modeBtnActive {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.pendingBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    white-space: nowrap;
+}
+
+.pendingBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.limitNotice {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-muted);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── 지정가 조건 ── */
+.conditionBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.conditionBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    text-align: left;
+    width: 100%;
+}
+
+.conditionBtn:hover {
+    border-color: var(--accent);
+}
+
+.conditionActive {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+}
+
+.conditionLabel {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.conditionDesc {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── 목표가 입력 ── */
+.targetPriceRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.targetPriceInput {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.targetPriceInput:focus {
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+.targetPriceInput::-webkit-outer-spin-button,
+.targetPriceInput::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.wonLabel {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.targetHint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.labelHint {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.accent { color: var(--accent); }
+
+.limitBtn {
+    background: var(--accent);
+    color: white;
+}
+
+/* ── 예수금 바 ── */
+.balanceBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.balanceBuy { background: var(--rise-bg); }
+.balanceSell { background: var(--fall-bg); }
+
+.balanceLabel {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.balanceValue {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.section {}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+}
+
+/* ── 종목 카드 목록 (매수/매도 공통) ── */
+.stockCards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.stockCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    text-align: left;
+    width: 100%;
+}
+
+.stockCard:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+}
+
+.stockCard:active {
+    transform: scale(0.985);
+}
+
+.selectedCard {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+}
+
+.cardLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cardName {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.cardCode {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.cardRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.cardPrice {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.cardRate {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+
+.stockList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.stockBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.stockBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.selectedStock {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.holdAmount {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.priceCard {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priceInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stockTitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.nowPrice {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.5px;
+}
+
+.priceRate {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.depositInfo {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+.depositInfo strong {
+    color: var(--text-primary);
+    display: block;
+    font-size: 14px;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.maxQtyHint {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-variant-numeric: tabular-nums;
+}
+
+.amountRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.amountBtn {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    flex-shrink: 0;
+}
+
+.amountBtn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+}
+
+.amountBtn:active {
+    transform: scale(0.92);
+}
+
+.amountInput {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    transition: border-color var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.amountInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.maxBtns {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.pctBtn {
+    flex: 1;
+    padding: 7px 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.pctBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.orderSummary {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summaryRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.summaryRow strong {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.summaryDivider {
+    height: 1px;
+    background: var(--border-subtle);
+}
+
+.orderBtn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    margin-top: 4px;
+}
+
+.orderBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.buyBtn {
+    background: var(--rise);
+    color: white;
+}
+
+.buyBtn:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(240, 72, 88, 0.25);
+    transform: translateY(-1px);
+}
+
+.buyBtn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.sellBtn {
+    background: var(--fall);
+    color: white;
+}
+
+.sellBtn:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(59, 139, 235, 0.25);
+    transform: translateY(-1px);
+}
+
+.sellBtn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.notLogin {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+}

@@ -1,0 +1,719 @@
+.page {
+    padding-bottom: 12px;
+}
+
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+
+/* ── 계좌 없음 화면 ── */
+.noAccountWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 24px 48px;
+    text-align: center;
+}
+
+.noAccountIcon {
+    font-size: 56px !important;
+    color: var(--accent);
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.noAccountTitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.4px;
+}
+
+.noAccountDesc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 32px;
+    line-height: 1.6;
+}
+
+.createBtn {
+    padding: 15px 40px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-accent);
+}
+
+.createBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(234, 179, 8, 0.25);
+}
+
+.createBtn:active {
+    transform: scale(0.95);
+}
+
+/* ── 계좌 생성 폼 ── */
+.createForm {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.formLabel {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.formInput {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: border-color var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.formInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-muted);
+}
+
+.seedGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.seedBtn {
+    padding: 11px;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.seedBtn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.seedActive {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.seedDisplay {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 6px 0 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.6px;
+}
+
+.formActions {
+    display: flex;
+    gap: 8px;
+}
+
+.cancelBtn {
+    flex: 1;
+    padding: 13px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.cancelBtn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.confirmBtn {
+    flex: 2;
+    padding: 13px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-accent);
+}
+
+.confirmBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(234, 179, 8, 0.25);
+}
+
+.confirmBtn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.confirmBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ── 성장 단계 카드 ── */
+.growthCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--accent-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.growthIconWrap {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-subtle);
+    border: 2px solid var(--accent-muted);
+    border-radius: 50%;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.growthInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.growthLabel {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+}
+
+.growthDesc {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.growthPath {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.growthDot {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-muted);
+    opacity: 0.35;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.growthDotActive {
+    opacity: 1;
+    color: var(--accent);
+    background: var(--accent-subtle);
+}
+
+/* ── 총 자산 카드 ── */
+.assetCard {
+    background: var(--bg-card);
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+}
+
+.assetTopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.assetLabel {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.assetValue {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-top: 4px;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+}
+
+.returnBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.returnLabel {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.returnRate {
+    font-size: 17px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.profitSummary {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    font-variant-numeric: tabular-nums;
+}
+
+.profitRateText {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.75;
+}
+
+.profitRate {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.assetStats {
+    display: flex;
+    gap: 0;
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+}
+
+.assetStat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 4px;
+    border-right: 1px solid var(--border-subtle);
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.assetStat:last-child {
+    border-right: none;
+}
+
+.assetStat strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 섹션 ── */
+.section {
+    padding: 20px 16px;
+}
+
+.sectionTitle {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.3px;
+}
+
+.count {
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-subtle);
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 파이차트 ── */
+.pieArea {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    overflow: hidden;
+}
+
+.pieChart {
+    flex-shrink: 0;
+}
+
+.legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legendDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.legendName {
+    font-size: 13px;
+    color: var(--text-secondary);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.legendPct {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 종목 목록 ── */
+.stockList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stockCard {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+}
+
+.stockCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.stockCard:active {
+    transform: scale(0.98);
+}
+
+.stockTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.stockName {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+}
+
+.stockCode {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.stockRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.nowPriceLabel {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.stockBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.profitAmt {
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.progressBar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 600ms var(--ease-spring);
+}
+
+.riseBar { background: var(--rise); }
+.fallBar { background: var(--fall); }
+
+.loading, .empty, .notLogin {
+    text-align: center;
+    padding: 72px 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ── 데스크탑 ── */
+@media (min-width: 768px) {
+    .pieArea {
+        gap: 28px;
+    }
+
+    .stockList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+/* ── AI 리포트 ── */
+.aiReportBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 32px);
+    margin: 0 16px 16px;
+    padding: 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-accent);
+}
+
+.aiReportBtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(234, 179, 8, 0.25);
+}
+
+.aiReportBtn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.aiReportBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 19, 0, 0.3);
+    backdrop-filter: blur(12px);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.reportModal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+}
+
+.reportHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+.reportTitleRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reportTitle {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.reportClose {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    padding: 7px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.reportClose:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.reportBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 22px;
+}
+
+.reportLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 52px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.reportContent {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text-primary);
+}
+
+.reportContent h1, .reportContent h2, .reportContent h3 {
+    font-size: 15px;
+    font-weight: 800;
+    margin: 22px 0 8px;
+    color: var(--accent);
+    letter-spacing: -0.2px;
+}
+
+.reportContent p {
+    margin: 0 0 12px;
+}
+
+.reportContent ul, .reportContent ol {
+    margin: 4px 0 12px;
+    padding-left: 20px;
+}
+
+.reportContent li {
+    margin-bottom: 4px;
+}
+
+.reportContent strong {
+    color: var(--accent);
+    font-weight: 700;
+}

@@ -1,0 +1,226 @@
+.page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+}
+
+.desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ── 탭 ── */
+.tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+    white-space: nowrap;
+}
+
+.tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.activeTab {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ── 로딩 ── */
+.loading {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ── 카드 리스트 ── */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    text-align: left;
+}
+
+.card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.card:active {
+    transform: scale(0.985);
+}
+
+.cardLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.cardTopRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.categoryTag {
+    font-size: 10px;
+    font-weight: 650;
+    color: var(--accent);
+    background: var(--accent-subtle);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.trackingIndex {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardName {
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardCode {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.cardRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.cardPrice {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.cardChange {
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.rise {
+    color: var(--rise);
+}
+
+.fall {
+    color: var(--fall);
+}
+
+.unavailable {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ── 안내 박스 ── */
+.infoBox {
+    margin-top: 24px;
+    background: var(--accent-muted);
+    border: 1px solid rgba(234, 179, 8, 0.12);
+    border-radius: var(--radius-md);
+    padding: 16px;
+}
+
+.infoTitle {
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--accent);
+    margin: 0 0 10px;
+}
+
+.infoList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.infoList li {
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding-left: 12px;
+    position: relative;
+}
+
+.infoList li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+}

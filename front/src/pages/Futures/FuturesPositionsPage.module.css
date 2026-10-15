@@ -1,0 +1,242 @@
+.page {
+    padding: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.4px;
+}
+
+.toMarketBtn {
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.toMarketBtn:hover {
+    opacity: 0.75;
+}
+
+/* 요약 카드 */
+.summaryCard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.summaryItem {
+    background: var(--bg-card);
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.summaryLabel {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.summaryValue {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* 탭 */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.tab.activeTab {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* 빈 상태 */
+.empty {
+    text-align: center;
+    padding: 60px 16px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.goBtn {
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.goBtn:hover {
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-1px);
+}
+
+.goBtn:active {
+    transform: scale(0.97);
+}
+
+/* 목록 */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 카드 */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.closedCard {
+    opacity: 0.7;
+}
+
+.cardTop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.cardLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.dirTag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.cardName {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.leverage {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.statusBadge {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* 본문 */
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceLabel {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.priceValue {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+
+/* 청산 버튼 */
+.closeBtn {
+    width: 100%;
+    padding: 11px;
+    background: none;
+    border: 1px solid var(--fall);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--fall);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.closeBtn:hover:not(:disabled) {
+    background: var(--fall-bg);
+}
+
+.closeBtn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.closeBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

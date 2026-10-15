@@ -1,0 +1,692 @@
+/* ── 로딩 ── */
+.loadingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: 16px;
+    color: var(--text-secondary);
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── 페이지 ── */
+.page {
+    padding: 0 0 24px 0;
+    max-width: 1100px;
+}
+
+/* ── 상단 바 ── */
+.topBar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 253, 247, 0.92);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    z-index: 10;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.backBtn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.backBtn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.backBtn:active {
+    transform: scale(0.9);
+}
+
+.titleArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stockName {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 750;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+}
+
+.stockCode {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.watchBtn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.watchBtn:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
+
+.watchBtn:active {
+    transform: scale(0.85);
+}
+
+.starActive {
+    color: var(--gold) !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+/* ── 가격 섹션 ── */
+.priceSection {
+    padding: 20px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.currentPrice {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.priceChange {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.changeRate {
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.rise { color: var(--rise) !important; }
+.fall { color: var(--fall) !important; }
+.flat { color: var(--text-secondary); }
+
+/* ── 통계 행 ── */
+.statsRow {
+    display: flex;
+    gap: 0;
+    padding: 10px 16px 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.statsRow::-webkit-scrollbar { display: none; }
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 16px 6px 0;
+    min-width: 72px;
+}
+
+.statLabel {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.statValue {
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--text-primary);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── 메인 그리드 ── */
+.mainGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+@media (min-width: 768px) {
+    .mainGrid {
+        flex-direction: row;
+        gap: 16px;
+        padding: 16px;
+        align-items: flex-start;
+    }
+}
+
+/* ── 차트 섹션 ── */
+.chartSection {
+    flex: 1;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+@media (min-width: 768px) {
+    .chartSection {
+        padding: 0;
+    }
+}
+
+.periodSelector {
+    display: flex;
+    gap: 6px;
+}
+
+.periodBtn {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.periodBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.periodActive {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow-accent);
+}
+
+.noChart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 240px;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    border: 2px dashed var(--border);
+}
+
+/* ── 주문 패널 ── */
+.orderPanel {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 768px) {
+    .orderPanel {
+        width: 320px;
+        min-width: 320px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        position: sticky;
+        top: 80px;
+        box-shadow: var(--shadow-md);
+    }
+}
+
+.orderTabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.orderTab {
+    flex: 1;
+    padding: 14px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 600;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.buyActive {
+    color: var(--rise);
+    border-bottom: 2.5px solid var(--rise);
+}
+
+.sellActive {
+    color: var(--fall);
+    border-bottom: 2.5px solid var(--fall);
+}
+
+.orderBody {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accountInfo {
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.infoValue {
+    font-weight: 650;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.qtyRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qtyLabel {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.qtyControl {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.qtyBtn {
+    width: 38px;
+    height: 38px;
+    background: var(--bg-primary);
+    border: none;
+    color: var(--text-primary);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.qtyBtn:hover {
+    background: var(--bg-card-hover);
+}
+
+.qtyBtn:active {
+    transform: scale(0.9);
+}
+
+.qtyInput {
+    width: 64px;
+    height: 38px;
+    background: var(--bg-card);
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    font-variant-numeric: tabular-nums;
+    -moz-appearance: textfield;
+}
+
+.qtyInput::-webkit-outer-spin-button,
+.qtyInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.quickBtns {
+    display: flex;
+    gap: 6px;
+}
+
+.quickBtn {
+    flex: 1;
+    padding: 7px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.quickBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.totalValue {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.buyBtn {
+    background: var(--rise);
+}
+
+.buyBtn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.25);
+    transform: translateY(-2px);
+}
+
+.buyBtn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.sellBtn {
+    background: var(--fall);
+}
+
+.sellBtn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(91, 155, 213, 0.3);
+    transform: translateY(-2px);
+}
+
+.sellBtn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.loginHint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ── 주문 확인 모달 ── */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 19, 0, 0.3);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modalBox {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--shadow-lg);
+}
+
+.modalTitle {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+    letter-spacing: -0.3px;
+}
+
+.modalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.modalRow strong {
+    color: var(--text-primary);
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+.modalTotal {
+    border-bottom: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-top: 8px;
+}
+
+.modalTotal strong {
+    font-size: 18px;
+}
+
+.modalActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.modalCancel {
+    flex: 1;
+    padding: 13px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.modalCancel:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.modalConfirm {
+    flex: 2;
+    padding: 13px;
+    border-radius: var(--radius-md);
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.modalConfirm:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-accent);
+}
+
+.modalConfirm:active {
+    transform: scale(0.96);
+}
+
+/* ── AI 분석 ── */
+.aiSection {
+    padding: 0 16px 20px;
+}
+
+.aiBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-accent);
+}
+
+.aiBtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(234, 179, 8, 0.25);
+}
+
+.aiBtn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.aiBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.aiResult {
+    margin-top: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    animation: fadeIn 0.4s var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.aiLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.aiContent {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-primary);
+}
+
+.aiContent h1, .aiContent h2, .aiContent h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 14px 0 6px;
+    color: var(--accent);
+    letter-spacing: -0.2px;
+}
+
+.aiContent p {
+    margin: 0 0 10px;
+}
+
+.aiContent ul, .aiContent ol {
+    margin: 4px 0 10px;
+    padding-left: 20px;
+}
+
+.aiContent li {
+    margin-bottom: 4px;
+}
+
+.aiContent strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,245 @@
+.page {
+    padding: 0 0 12px;
+}
+
+/* ── 응용반 바로가기 ── */
+.quickLinks {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.quickLink {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    position: relative;
+}
+
+.quickLink:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    color: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.quickLink:active {
+    transform: scale(0.96);
+}
+
+.quickIcon {
+    font-size: 18px !important;
+}
+
+/* 데스크탑에서는 사이드바로 접근 가능하므로 숨김 */
+@media (min-width: 768px) {
+    .quickLinks {
+        display: none;
+    }
+}
+
+/* ── 급등 섹션 ── */
+.risingSection {
+    padding: 14px 0 6px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.risingSectionHeader {
+    padding: 0 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rankTabs {
+    display: flex;
+    gap: 6px;
+}
+
+.rankTab {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.rankTabRise {
+    background: var(--rise-bg);
+    border-color: var(--rise);
+    color: var(--rise);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+}
+
+.rankTabFall {
+    background: var(--fall-bg);
+    border-color: var(--fall);
+    color: var(--fall);
+    box-shadow: 0 2px 8px rgba(91, 155, 213, 0.1);
+}
+
+.rankLoading {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 20px;
+    white-space: nowrap;
+}
+
+.risingScroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+}
+
+.risingScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.risingCard {
+    flex-shrink: 0;
+    width: 120px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-sm);
+}
+
+.risingCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.risingCard:active {
+    transform: scale(0.95);
+}
+
+.risingRank {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+.risingName {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+}
+
+.risingPrice {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.risingRate {
+    font-size: 14px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.rise { color: var(--rise); }
+.fall { color: var(--fall); }
+
+.section {
+    padding: 0 16px;
+    margin-top: 10px;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 4px 0;
+}
+
+.sectionTitle {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.4px;
+}
+
+.sectionCount {
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-subtle);
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.watchlist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+}
+
+.empty p {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--text-secondary);
+}
+
+.empty span {
+    font-size: 13px;
+}
+
+.skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skeletonCard {
+    height: 80px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    animation: pulse 1.5s ease-in-out infinite;
+    border: 1px solid var(--border-subtle);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
