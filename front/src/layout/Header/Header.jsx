@@ -48,7 +48,7 @@ const Header = () => {
         <header className={classes.header}>
             <div className={classes.logo} onClick={() => navigate('/')}>
                 <IconHome size={20} stroke={1.5} className={classes.logoIcon} />
-                <span className={classes.logoText}>주린이집</span>
+                <span className={classes.logoText}>StockNest</span>
                 <span className={classes.logoTag}>HTS</span>
             </div>
             <div className={classes.actions}>

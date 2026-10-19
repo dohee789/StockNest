@@ -8,11 +8,11 @@
 		<version>3.2.3</version>
 		<relativePath/>
 	</parent>
-	<groupId>dev.pomyharry.stocksimulator</groupId>
-	<artifactId>back</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>back</name>
-	<description>Stock Simulator MTS - Spring Boot 3.2</description>
+	<groupId>dev.stocknest</groupId>
+	<artifactId>stocknest-api</artifactId>
+	<version>1.0.0</version>
+	<name>StockNest API</name>
+	<description>StockNest — AI-powered stock trading simulator</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

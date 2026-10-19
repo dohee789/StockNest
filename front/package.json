@@ -1,6 +1,6 @@
 {
-  "name": "front",
-  "version": "0.2.0",
+  "name": "stocknest-web",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",

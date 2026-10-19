@@ -68,7 +68,7 @@ const LoginPrompt = () => {
                 <div className={classes.heroIconWrap}>
                     <IconEgg size={48} stroke={1.5} className={classes.heroIcon} />
                 </div>
-                <h1 className={classes.heroTitle}>주린이집</h1>
+                <h1 className={classes.heroTitle}>StockNest</h1>
                 <p className={classes.heroDesc}>
                     주식, 일단 까보자!
                 </p>

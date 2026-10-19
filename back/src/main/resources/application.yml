@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/stocksimulator?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/stocknest?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -32,5 +32,5 @@ rag:
 
 logging:
   level:
-    dev.pomyharry: INFO
+    dev.stocknest: INFO
     org.springframework.web.socket: WARN
