@@ -20,7 +20,7 @@ server:
   port: 8090
 
 chatbot:
-  api-key: ${GEMINI_API_KEY:${GEMINI_API_KEY}}
+  api-key: ${GEMINI_API_KEY}
   model: ${GEMINI_MODEL:gemini-3.7-flash}
 
 # RAG + Vector DB
