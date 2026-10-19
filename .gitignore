@@ -9,6 +9,7 @@
 /back/build/
 /back/.gradle/
 !back/gradle/wrapper/gradle-wrapper.jar
+application-local.yml
 *.log
 hs_err_pid*
 replay_pid*
