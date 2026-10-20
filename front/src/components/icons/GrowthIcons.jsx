@@ -5,6 +5,32 @@ import React from 'react';
  * 24x24 viewBox, stroke-based, strokeLinecap/strokeLinejoin round.
  */
 
+export const IconNest = ({ size = 24, stroke = 1.5, className, ...props }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        {...props}
+    >
+        {/* eggs */}
+        <ellipse cx="8" cy="9" rx="2.5" ry="3" />
+        <ellipse cx="12" cy="8" rx="2.2" ry="3.2" />
+        <ellipse cx="16" cy="9" rx="2.5" ry="3" />
+        {/* nest bowl */}
+        <path d="M3 12c0 4.5 4 7 9 7s9-2.5 9-7" />
+        {/* woven texture */}
+        <path d="M4.5 14.5c3.5 1.2 11.5 1.2 15 0" />
+        <path d="M6 16.5c2.5 1 9.5 1 12 0" />
+    </svg>
+);
+
 export const IconChick = ({ size = 24, stroke = 1.5, className, ...props }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

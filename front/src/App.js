@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AppProvider } from './context/AppContext';
@@ -22,14 +22,16 @@ import EtfPage from './pages/Etf/EtfPage';
 import './App.css';
 
 const App = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <AppProvider>
             <BrowserRouter>
                 <div className="appContainer">
-                    <Header />
+                    <Header onMenuOpen={() => setMenuOpen(true)} />
                     <MarketIndex />
                     <div className="contentWrapper">
-                        <Sidebar />
+                        <Sidebar mobileOpen={menuOpen} onClose={() => setMenuOpen(false)} />
                         <main className="pageContent">
                             <Routes>
                                 <Route path="/" element={<HomePage />} />

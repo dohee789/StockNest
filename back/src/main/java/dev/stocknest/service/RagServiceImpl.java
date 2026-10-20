@@ -32,13 +32,15 @@ public class RagServiceImpl implements RagService {
 
     @PostConstruct
     public void init() {
-        // 비동기로 초기화 (앱 시작 지연 방지)
         CompletableFuture.runAsync(() -> {
             try {
-                Thread.sleep(5000); // Chroma 시작 대기
+                if (!vectorStoreService.isAvailable()) {
+                    log.info("ChromaDB 미실행 — RAG 비활성, 챗봇은 정상 작동합니다.");
+                    return;
+                }
                 initializeKnowledgeBase();
             } catch (Exception e) {
-                log.warn("RAG 초기화 실패 (Chroma 미실행 상태일 수 있음): {}", e.getMessage());
+                log.warn("RAG 초기화 실패: {}", e.getMessage());
             }
         });
     }

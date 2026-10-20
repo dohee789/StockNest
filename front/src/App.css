@@ -1,9 +1,11 @@
-/* ── 모바일 기본 레이아웃 ── */
+/* ── 기본 레이아웃 (고정 뷰포트) ── */
 .appContainer {
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     background: var(--bg-primary);
+    padding-top: var(--safe-top);
 }
 
 .contentWrapper {
@@ -15,29 +17,35 @@
 .pageContent {
     flex: 1;
     overflow-y: auto;
-    padding-bottom: calc(var(--bottom-nav-height) + 8px);
+    -webkit-overflow-scrolling: touch;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
     min-width: 0;
 }
 
-/* ── 데스크탑 레이아웃 (768px+) ── */
+/* ── 태블릿 (768px+) ── */
 @media (min-width: 768px) {
-    .appContainer {
-        max-width: 100%;
-    }
-
     .contentWrapper {
         position: relative;
     }
 
     .pageContent {
-        padding-bottom: 24px;
         padding-left: 0;
+        padding-right: 0;
     }
 }
 
-/* ── 넓은 데스크탑 (1200px+) ── */
+/* ── 데스크탑 (1200px+) ── */
 @media (min-width: 1200px) {
     .pageContent {
         max-width: 1100px;
+    }
+}
+
+/* ── 와이드 데스크탑 (1440px+) ── */
+@media (min-width: 1440px) {
+    .pageContent {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 }

@@ -21,6 +21,52 @@
     }
 }
 
+/* ── 모바일 드로어 ── */
+.drawerOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(28, 19, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    max-width: 80vw;
+    background: var(--bg-secondary);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 10px;
+    padding-top: calc(14px + var(--safe-top));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 4px 0 24px rgba(60, 50, 10, 0.12);
+    animation: slideIn 0.25s var(--ease-spring);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@media (min-width: 768px) {
+    .drawerOverlay,
+    .drawer {
+        display: none;
+    }
+}
+
+/* ── 공통 스타일 ── */
 .logo {
     display: flex;
     align-items: center;

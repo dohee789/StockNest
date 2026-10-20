@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   datasource:
     url: jdbc:mysql://localhost:3306/stocknest?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
     username: ${DB_USERNAME:root}
@@ -20,7 +22,6 @@ server:
   port: 8090
 
 chatbot:
-  api-key: ${GEMINI_API_KEY}
   model: ${GEMINI_MODEL:gemini-3.7-flash}
 
 # RAG + Vector DB

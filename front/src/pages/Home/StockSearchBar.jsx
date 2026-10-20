@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
@@ -9,10 +10,17 @@ import classes from './StockSearchBar.module.css';
 const BASE_URL = API_BASE_URL;
 
 const StockSearchBar = ({ onStockAdded }) => {
+    const navigate = useNavigate();
     const { userId, isLoggedIn } = useApp();
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [, setSearching] = useState(false);
+
+    const goToDetail = (stock) => {
+        setQuery('');
+        setResults([]);
+        navigate(`/stock/${stock.code}`);
+    };
 
     const handleSearch = async (e) => {
         const val = e.target.value;
@@ -70,7 +78,7 @@ const StockSearchBar = ({ onStockAdded }) => {
                 <SearchRoundedIcon className={classes.searchIcon} />
                 <input
                     className={classes.input}
-                    placeholder="종목명 검색 후 관심종목 추가"
+                    placeholder="종목명 검색 (클릭: 상세, +: 관심종목)"
                     value={query}
                     onChange={handleSearch}
                 />
@@ -78,12 +86,12 @@ const StockSearchBar = ({ onStockAdded }) => {
             {results.length > 0 && (
                 <div className={classes.dropdown}>
                     {results.map(stock => (
-                        <div key={stock.code} className={classes.dropdownItem}>
+                        <div key={stock.code} className={classes.dropdownItem} onClick={() => goToDetail(stock)}>
                             <div className={classes.dropdownInfo}>
                                 <span className={classes.dropdownName}>{stock.name}</span>
                                 <span className={classes.dropdownCode}>{stock.code}</span>
                             </div>
-                            <button className={classes.addBtn} onClick={() => handleAdd(stock)}>
+                            <button className={classes.addBtn} onClick={(e) => { e.stopPropagation(); handleAdd(stock); }}>
                                 <AddRoundedIcon fontSize="small" />
                             </button>
                         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IconEgg, IconEggCracked, IconHome, IconChartLine, IconArrowsExchange, IconWallet, IconHistory, IconUser, IconChartCandle, IconChartBar } from '@tabler/icons-react';
-import { IconChicken } from '../../components/icons/GrowthIcons';
+import { IconChicken, IconNest } from '../../components/icons/GrowthIcons';
 import classes from './Sidebar.module.css';
 
 const navGroups = [
@@ -36,16 +36,20 @@ const navGroups = [
     },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ mobileOpen, onClose }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    return (
-        <aside className={classes.sidebar}>
-            <div className={classes.logo} onClick={() => navigate('/')}>
-                <IconHome size={20} stroke={1.5} className={classes.logoIcon} />
-                <span className={classes.logoText}>StockNest</span>
-                <span className={classes.logoTag}>HTS</span>
+    const handleNav = (path) => {
+        navigate(path);
+        onClose?.();
+    };
+
+    const navContent = (
+        <>
+            <div className={classes.logo} onClick={() => handleNav('/')}>
+                <IconNest size={22} stroke={1.5} className={classes.logoIcon} />
+                <span className={classes.logoText}>삐약스탁</span>
             </div>
 
             <nav className={classes.nav}>
@@ -62,7 +66,7 @@ const Sidebar = () => {
                                 <button
                                     key={path}
                                     className={`${classes.navItem} ${isActive ? classes.active : ''}`}
-                                    onClick={() => navigate(path)}
+                                    onClick={() => handleNav(path)}
                                     {...(tooltip ? { 'data-tooltip': tooltip } : {})}
                                 >
                                     <Icon size={20} stroke={1.5} className={classes.navIcon} />
@@ -73,7 +77,26 @@ const Sidebar = () => {
                     </div>
                 ))}
             </nav>
-        </aside>
+        </>
+    );
+
+    return (
+        <>
+            {/* 데스크탑 사이드바 */}
+            <aside className={classes.sidebar}>
+                {navContent}
+            </aside>
+
+            {/* 모바일 드로어 */}
+            {mobileOpen && (
+                <>
+                    <div className={classes.drawerOverlay} onClick={onClose} />
+                    <aside className={classes.drawer}>
+                        {navContent}
+                    </aside>
+                </>
+            )}
+        </>
     );
 };
 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="108" fill="#CA8A04"/>
+  <g transform="translate(40 68) scale(18)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- eggs -->
+    <g fill="white" stroke="rgba(255,255,255,0.4)" stroke-width="0.2">
+      <ellipse cx="8" cy="9" rx="2.5" ry="3"/>
+      <ellipse cx="12" cy="8" rx="2.2" ry="3.2"/>
+      <ellipse cx="16" cy="9" rx="2.5" ry="3"/>
+    </g>
+    <!-- nest -->
+    <g stroke="white" stroke-width="1.1">
+      <path d="M3 12c0 4.5 4 7 9 7s9-2.5 9-7"/>
+      <path d="M4.5 14.5c3.5 1.2 11.5 1.2 15 0"/>
+      <path d="M6 16.5c2.5 1 9.5 1 12 0"/>
+    </g>
+  </g>
+</svg>

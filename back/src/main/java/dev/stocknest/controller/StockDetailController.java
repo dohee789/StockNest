@@ -37,7 +37,6 @@ public class StockDetailController {
 
             StockDetailDTO detail = StockDetailDTO.builder()
                     .code(code)
-                    .name(code)
                     .price(priceInfo != null ? priceInfo.getPrice() : "-")
                     .change(priceInfo != null ? priceInfo.getChange() : "-")
                     .changeRate(priceInfo != null ? priceInfo.getChangeRate() : "-")
@@ -46,6 +45,12 @@ public class StockDetailController {
 
             // 추가 정보 (종목명·거래량·52주 고저·PER/PBR)
             candleDataComponent.enrichStockDetail(detail);
+
+            // Yahoo에서 종목명을 못 가져온 경우 fallback
+            if (detail.getName() == null || detail.getName().isBlank()) {
+                detail.setName(priceInfo != null && priceInfo.getName() != null
+                        ? priceInfo.getName() : code);
+            }
 
             return ResponseEntity.ok(detail);
         } catch (Exception e) {

@@ -1,11 +1,12 @@
 .indexBar {
     display: flex;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 8px calc(16px + var(--safe-right)) 8px calc(16px + var(--safe-left));
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-subtle);
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .indexBar::-webkit-scrollbar {

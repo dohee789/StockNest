@@ -2,8 +2,7 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(28, 19, 0, 0.2);
-    backdrop-filter: blur(6px);
+    background: rgba(28, 19, 0, 0.15);
 }
 
 .panel {
@@ -340,5 +339,11 @@
         height: 100dvh;
         max-height: 100dvh;
         border-radius: 0;
+        padding-top: var(--safe-top);
+        padding-bottom: var(--safe-bottom);
+    }
+
+    .inputArea {
+        padding-bottom: calc(14px + var(--safe-bottom));
     }
 }

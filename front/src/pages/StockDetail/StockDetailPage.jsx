@@ -181,7 +181,9 @@ const StockDetailPage = () => {
                     setQuantity(1);
                     fetchAccount();
                 } else {
-                    toast.error(await res.text());
+                    const errText = await res.text();
+                    try { toast.error(JSON.parse(errText).message || '매수에 실패했습니다'); }
+                    catch { toast.error(errText || '매수에 실패했습니다'); }
                 }
             } else {
                 const res = await fetch(`${BASE_URL}/stocks/sell-stock`, {
@@ -199,7 +201,9 @@ const StockDetailPage = () => {
                     setQuantity(1);
                     fetchAccount();
                 } else {
-                    toast.error(await res.text());
+                    const errText = await res.text();
+                    try { toast.error(JSON.parse(errText).message || '매도에 실패했습니다'); }
+                    catch { toast.error(errText || '매도에 실패했습니다'); }
                 }
             }
         } finally {
