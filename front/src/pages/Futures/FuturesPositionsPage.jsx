@@ -2,9 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config/api';
 import classes from './FuturesPositionsPage.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 
 const STATUS_LABEL = { OPEN: '보유중', CLOSED: '청산됨', LIQUIDATED: '강제청산' };
 const STATUS_COLOR = { OPEN: 'var(--accent)', CLOSED: 'var(--text-muted)', LIQUIDATED: 'var(--rise)' };

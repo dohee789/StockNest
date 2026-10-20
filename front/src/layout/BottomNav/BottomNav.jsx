@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
     IconHome, IconChartLine, IconArrowsExchange, IconWallet,
     IconDotsVertical, IconBuildingBank, IconTimeline, IconHistory,
-    IconUser, IconX
+    IconUser, IconX, IconSchool
 } from '@tabler/icons-react';
 import classes from './BottomNav.module.css';
 
@@ -15,6 +15,7 @@ const navItems = [
 ];
 
 const moreItems = [
+    { path: '/tutorial', label: '투자 가이드', Icon: IconSchool },
     { path: '/etf', label: 'ETF', Icon: IconBuildingBank },
     { path: '/futures', label: '선물', Icon: IconTimeline },
     { path: '/history', label: '거래내역', Icon: IconHistory },

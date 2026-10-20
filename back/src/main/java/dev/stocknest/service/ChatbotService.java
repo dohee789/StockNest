@@ -1,6 +1,7 @@
 package dev.stocknest.service;
 
 import dev.stocknest.model.dto.ChatMessageDTO;
+import dev.stocknest.model.dto.StockRecommendationDTO;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;
@@ -11,6 +12,9 @@ public interface ChatbotService {
     String analyzeStock(String customerId, String stockCode);
     String generatePortfolioReport(String customerId);
     String generateMarketInsight(String customerId);
+    List<StockRecommendationDTO> generateStockRecommendations(String customerId);
+    String generateMarketBriefing(String customerId);
+    String generateTradeSignals(String customerId);
     List<ChatMessageDTO> getHistory(String customerId);
     void clearHistory(String customerId);
 }

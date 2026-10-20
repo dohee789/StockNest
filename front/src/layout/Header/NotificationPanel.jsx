@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { IconSparkles, IconX, IconTrash } from '@tabler/icons-react';
 import Markdown from 'markdown-to-jsx';
+import { API_BASE_URL } from '../../config/api';
 import classes from './NotificationPanel.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 
 const TYPE_LABEL = {
     BUY_MARKET: '시장가 매수',

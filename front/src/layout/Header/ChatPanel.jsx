@@ -5,9 +5,10 @@ import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import Markdown from 'markdown-to-jsx';
+import { API_BASE_URL } from '../../config/api';
 import classes from './ChatPanel.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 
 const QUICK_QUESTIONS = [
     '내 포트폴리오 분석해줘',

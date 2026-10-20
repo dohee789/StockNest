@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 import classes from './EtfPage.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 
 const CATEGORY_LABEL = {
     DOMESTIC_INDEX: '국내지수',

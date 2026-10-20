@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 import { KAKAO_AUTH_URL } from '../../features/KakaoLogin/OAuth';
 import { IconEgg, IconEggCracked, IconChevronRight } from '@tabler/icons-react';
 import { IconChick, IconChicken } from '../../components/icons/GrowthIcons';
+import { API_BASE_URL } from '../../config/api';
 import classes from './LoginPrompt.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 
 const LoginPrompt = () => {
+    const navigate = useNavigate();
     const { login } = useApp();
     const [tab, setTab] = useState('login');
     const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -126,6 +129,9 @@ const LoginPrompt = () => {
                     </form>
                 )}
             </div>
+            <button className={classes.tutorialLink} onClick={() => navigate('/tutorial')}>
+                주식이 처음이신가요? 투자 가이드 보기
+            </button>
         </div>
     );
 };

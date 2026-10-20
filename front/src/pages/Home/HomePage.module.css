@@ -2,6 +2,34 @@
     padding: 0 0 12px;
 }
 
+/* ── 튜토리얼 배너 ── */
+.tutorialBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: calc(100% - 32px);
+    margin: 8px 16px 0;
+    padding: 12px 16px;
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent-muted);
+    border-radius: var(--radius-sm);
+    color: var(--accent-dark);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.tutorialBanner strong {
+    font-weight: 700;
+}
+
+.tutorialBanner:hover {
+    background: var(--accent-muted);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
 /* ── 응용반 바로가기 ── */
 .quickLinks {
     display: flex;

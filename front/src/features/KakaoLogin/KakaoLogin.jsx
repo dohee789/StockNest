@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8090';
+
 const KakaoLogin = () => {
     const { code } = useParams();
     const { login } = useApp();
@@ -15,7 +17,7 @@ const KakaoLogin = () => {
 
         const doLogin = async () => {
             try {
-                const res = await fetch(`http://localhost:8090/afterlogin?code=${encodeURIComponent(code)}`, {
+                const res = await fetch(`${BASE_URL}/afterlogin?code=${encodeURIComponent(code)}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                 });

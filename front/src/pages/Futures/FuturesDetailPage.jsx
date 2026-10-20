@@ -2,9 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../config/api';
 import classes from './FuturesDetailPage.module.css';
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = API_BASE_URL;
 const LEVERAGES = [2, 5, 10, 20];
 const QUICK_PCT = [10, 25, 50, 100];
 

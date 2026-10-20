@@ -1,0 +1,295 @@
+.page {
+    padding: 16px 16px 32px;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+/* ── Progress ── */
+.progressBar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.progressDot {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-subtle);
+    transition: background var(--duration-normal) var(--ease-out);
+}
+
+.progressActive {
+    background: var(--accent);
+}
+
+.progressLabel {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* ── Card ── */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 32px 20px 24px;
+    text-align: center;
+}
+
+.cardIcon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-subtle);
+    border: 2px solid var(--accent-muted);
+    border-radius: 50%;
+    color: var(--accent);
+}
+
+.cardTitle {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+}
+
+.cardSubtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 24px;
+}
+
+.cardContent {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ── Content types ── */
+.analogy {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    background: var(--accent-subtle);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    line-height: 1.5;
+}
+
+.explain {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.tip {
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    line-height: 1.6;
+}
+
+.keyword {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+}
+
+.keywordLabel {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    background: var(--accent-subtle);
+    padding: 4px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.keywordDesc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.colorGuide {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.colorUp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--rise-bg);
+    color: var(--rise);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.colorDown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--fall-bg);
+    color: var(--fall);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stepsList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.stepsItem {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.stepsItem:last-child {
+    border-bottom: none;
+}
+
+.stepsItem::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    border-radius: 50%;
+}
+
+/* ── Next steps (step 5) ── */
+.nextSteps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nextStepCard {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.nextStepCard:hover:not(:disabled) {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.nextStepCard:disabled {
+    cursor: default;
+}
+
+.nextStepLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.nextStepDesc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ── Navigation ── */
+.navRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.navBtn:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent-dark);
+}
+
+.navBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.startBtn {
+    flex: 1;
+    padding: 14px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.startBtn:hover {
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-1px);
+}
+
+.startBtn:active {
+    transform: scale(0.97);
+}

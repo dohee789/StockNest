@@ -12,6 +12,99 @@ import classes from './PortfolioPage.module.css';
 const BASE_URL = API_BASE_URL;
 
 const PIE_COLORS = ['#EAB308', '#F59E0B', '#D97706', '#B45309', '#92400E', '#78716C', '#A8A29E', '#CA8A04', '#FACC15', '#FDE68A'];
+const SECTOR_COLORS = ['#EAB308', '#3B82F6', '#EF4444', '#10B981', '#8B5CF6', '#F97316', '#EC4899', '#6366F1', '#14B8A6', '#A855F7'];
+
+function parseReportMetrics(content) {
+    if (!content) return { cleanContent: '', riskScore: null, diversification: null, sectors: null };
+
+    let riskScore = null;
+    let diversification = null;
+    let sectors = null;
+    let cleanContent = content;
+
+    const riskMatch = content.match(/\[RISK_SCORE:(\d+)\/10\]/);
+    if (riskMatch) riskScore = parseInt(riskMatch[1]);
+
+    const divMatch = content.match(/\[DIVERSIFICATION:(\d+)\/10\]/);
+    if (divMatch) diversification = parseInt(divMatch[1]);
+
+    const sectorMatch = content.match(/\[SECTOR:(\{[^}]+\})\]/);
+    if (sectorMatch) {
+        try { sectors = JSON.parse(sectorMatch[1]); } catch { /* ignore */ }
+    }
+
+    cleanContent = cleanContent
+        .replace(/\[RISK_SCORE:\d+\/10\]/g, '')
+        .replace(/\[DIVERSIFICATION:\d+\/10\]/g, '')
+        .replace(/\[SECTOR:\{[^}]+\}\]/g, '')
+        .trim();
+
+    return { cleanContent, riskScore, diversification, sectors };
+}
+
+const ReportMetrics = ({ content }) => {
+    const { cleanContent, riskScore, diversification, sectors } = parseReportMetrics(content);
+    const sectorData = sectors ? Object.entries(sectors).map(([name, value], i) => ({
+        name, value: Number(value), color: SECTOR_COLORS[i % SECTOR_COLORS.length],
+    })) : null;
+
+    return (
+        <>
+            {(riskScore !== null || diversification !== null) && (
+                <div className={classes.metricsRow}>
+                    {riskScore !== null && (
+                        <div className={classes.metricCard}>
+                            <span className={classes.metricLabel}>리스크</span>
+                            <div className={classes.gauge}>
+                                <div
+                                    className={`${classes.gaugeFill} ${riskScore >= 7 ? classes.gaugeHigh : riskScore >= 4 ? classes.gaugeMid : classes.gaugeLow}`}
+                                    style={{ width: `${riskScore * 10}%` }}
+                                />
+                            </div>
+                            <span className={classes.metricValue}>{riskScore}/10</span>
+                        </div>
+                    )}
+                    {diversification !== null && (
+                        <div className={classes.metricCard}>
+                            <span className={classes.metricLabel}>분산투자</span>
+                            <div className={classes.gauge}>
+                                <div
+                                    className={`${classes.gaugeFill} ${diversification >= 7 ? classes.gaugeLow : diversification >= 4 ? classes.gaugeMid : classes.gaugeHigh}`}
+                                    style={{ width: `${diversification * 10}%` }}
+                                />
+                            </div>
+                            <span className={classes.metricValue}>{diversification}/10</span>
+                        </div>
+                    )}
+                </div>
+            )}
+            {sectorData && sectorData.length > 0 && (
+                <div className={classes.sectorSection}>
+                    <span className={classes.sectorTitle}>섹터 분포</span>
+                    <div className={classes.sectorPieArea}>
+                        <PieChart width={120} height={120}>
+                            <Pie data={sectorData} cx="50%" cy="50%" innerRadius={30} outerRadius={50} paddingAngle={2} dataKey="value">
+                                {sectorData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
+                            </Pie>
+                            <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#FFFDF7', border: '1px solid #EDE5D0', borderRadius: 8, fontSize: 11 }} />
+                        </PieChart>
+                        <div className={classes.sectorLegend}>
+                            {sectorData.map((d, i) => (
+                                <span key={i} className={classes.sectorTag}>
+                                    <span className={classes.sectorDot} style={{ background: d.color }} />
+                                    {d.name} {d.value}%
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+            <div className={classes.reportContent}>
+                <Markdown>{cleanContent}</Markdown>
+            </div>
+        </>
+    );
+};
 
 const GROWTH_STAGES = [
     { min: -Infinity, max: 0,   Icon: IconEgg, label: '알 단계', desc: '아직은 알이에요. 화이팅!' },
@@ -402,9 +495,7 @@ const PortfolioPage = () => {
                                     <p>AI가 포트폴리오를 분석하고 있습니다...</p>
                                 </div>
                             ) : (
-                                <div className={classes.reportContent}>
-                                    <Markdown>{reportContent}</Markdown>
-                                </div>
+                                <ReportMetrics content={reportContent} />
                             )}
                         </div>
                     </div>

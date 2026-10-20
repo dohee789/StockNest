@@ -72,6 +72,39 @@ public class ChatbotController {
         }
     }
 
+    /** AI 맞춤 종목 추천 */
+    @PostMapping("/stock-recommendations")
+    public ResponseEntity<?> stockRecommendations(@RequestBody Map<String, String> request) {
+        try {
+            var recommendations = chatbotService.generateStockRecommendations(request.get("customerId"));
+            return ResponseEntity.ok(Map.of("recommendations", recommendations));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    /** AI 시장 브리핑 */
+    @PostMapping("/market-briefing")
+    public ResponseEntity<?> marketBriefing(@RequestBody Map<String, String> request) {
+        try {
+            String briefing = chatbotService.generateMarketBriefing(request.get("customerId"));
+            return ResponseEntity.ok(Map.of("briefing", briefing));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    /** AI 매매 신호 */
+    @PostMapping("/trade-signals")
+    public ResponseEntity<?> tradeSignals(@RequestBody Map<String, String> request) {
+        try {
+            String signals = chatbotService.generateTradeSignals(request.get("customerId"));
+            return ResponseEntity.ok(Map.of("signals", signals));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
     /** 대화 기록 조회 */
     @GetMapping("/history/{customerId}")
     public ResponseEntity<?> getHistory(@PathVariable String customerId) {

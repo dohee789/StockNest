@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: stocknest-api
+    runtime: docker
+    dockerfilePath: ./back/Dockerfile
+    dockerContext: ./back
+    plan: free
+    region: singapore
+    healthCheckPath: /api/stock/list
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_URL
+        sync: false  # Neon 연결 문자열 (jdbc:postgresql://...neon.tech/stocknest)
+      - key: DB_USERNAME
+        sync: false  # Neon 사용자명
+      - key: DB_PASSWORD
+        sync: false  # Neon 비밀번호
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: FRONTEND_URL
+        sync: false
+      - key: CHROMA_URL
+        value: ""
+      - key: TZ
+        value: Asia/Seoul

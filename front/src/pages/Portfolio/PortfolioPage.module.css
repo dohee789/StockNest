@@ -717,3 +717,100 @@
     color: var(--accent);
     font-weight: 700;
 }
+
+/* ── 리포트 메트릭 시각화 ── */
+.metricsRow {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.metricCard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.metricLabel {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.gauge {
+    height: 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gaugeFill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s ease;
+}
+
+.gaugeLow {
+    background: #10B981;
+}
+
+.gaugeMid {
+    background: var(--accent);
+}
+
+.gaugeHigh {
+    background: #EF4444;
+}
+
+.metricValue {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.sectorSection {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.sectorTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sectorPieArea {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sectorLegend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sectorTag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 3px 8px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+.sectorDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}

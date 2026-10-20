@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 
 const AppContext = createContext(null);
 
-const BASE_URL = 'http://localhost:8090';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8090';
 
 export const AppProvider = ({ children }) => {
     const [userId, setUserId] = useState(sessionStorage.getItem('USER') || '');

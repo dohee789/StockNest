@@ -2,11 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import { useWebSocket } from '../../hooks/useWebSocket';
-import { IconChartBar, IconChartCandle, IconHistory, IconTrendingUp, IconTrendingDown } from '@tabler/icons-react';
+import { IconChartBar, IconChartCandle, IconHistory, IconTrendingUp, IconTrendingDown, IconSchool } from '@tabler/icons-react';
 import WatchlistCard from './WatchlistCard';
 import PortfolioSummaryCard from './PortfolioSummaryCard';
 import LoginPrompt from './LoginPrompt';
 import StockSearchBar from './StockSearchBar';
+import AiMarketBriefingCard from './AiMarketBriefingCard';
+import AiRecommendationsCard from './AiRecommendationsCard';
 import { API_BASE_URL } from '../../config/api';
 import classes from './HomePage.module.css';
 
@@ -88,6 +90,15 @@ const HomePage = () => {
         <div className={classes.page}>
             <StockSearchBar onStockAdded={fetchWatchlist} />
 
+            {!isLoggedIn && (
+                <button className={classes.tutorialBanner} onClick={() => navigate('/tutorial')}>
+                    <IconSchool size={18} stroke={1.5} />
+                    <span>주식이 처음이라면? <strong>투자 가이드</strong>로 시작해보세요</span>
+                </button>
+            )}
+
+            {isLoggedIn && <AiMarketBriefingCard />}
+
             {/* 급등 / 급락 종목 수평 스크롤 */}
             <section className={classes.risingSection}>
                 <div className={classes.risingSectionHeader}>
@@ -152,6 +163,7 @@ const HomePage = () => {
             {isLoggedIn ? (
                 <>
                     <PortfolioSummaryCard />
+                    <AiRecommendationsCard />
                     <section className={classes.section}>
                         <div className={classes.sectionHeader}>
                             <h2 className={classes.sectionTitle}>관심종목</h2>

@@ -3,7 +3,7 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { useApp } from '../context/AppContext';
 
-const WS_URL = 'http://localhost:8090/ws';
+const WS_URL = (process.env.REACT_APP_API_URL || 'http://localhost:8090') + '/ws';
 
 export const useWebSocket = () => {
     const { updateRealtimePrice } = useApp();

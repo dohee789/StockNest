@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import { API_BASE_URL } from '../../config/api';
 import classes from './MarketIndex.module.css';
 
-const BASE_URL = 'http://localhost:8090/market-index';
+const BASE_URL = API_BASE_URL + '/market-index';
 
 const MarketIndex = () => {
     const [indexes, setIndexes] = useState([]);

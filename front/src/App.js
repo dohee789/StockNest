@@ -19,6 +19,7 @@ import FuturesPage from './pages/Futures/FuturesPage';
 import FuturesDetailPage from './pages/Futures/FuturesDetailPage';
 import FuturesPositionsPage from './pages/Futures/FuturesPositionsPage';
 import EtfPage from './pages/Etf/EtfPage';
+import TutorialPage from './pages/Tutorial/TutorialPage';
 import './App.css';
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
                                 <Route path="/futures" element={<FuturesPage />} />
                                 <Route path="/futures/positions" element={<FuturesPositionsPage />} />
                                 <Route path="/futures/:code" element={<FuturesDetailPage />} />
+                                <Route path="/tutorial" element={<TutorialPage />} />
                                 <Route path="/KakaoLogin/:code" element={<KakaoLogin />} />
                             </Routes>
                         </main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { IconEgg, IconEggCracked, IconHome, IconChartLine, IconArrowsExchange, IconWallet, IconHistory, IconUser, IconChartCandle, IconChartBar } from '@tabler/icons-react';
+import { IconEgg, IconEggCracked, IconHome, IconChartLine, IconArrowsExchange, IconWallet, IconHistory, IconUser, IconChartCandle, IconChartBar, IconSchool } from '@tabler/icons-react';
 import { IconChicken, IconNest } from '../../components/icons/GrowthIcons';
 import classes from './Sidebar.module.css';
 
@@ -11,6 +11,7 @@ const navGroups = [
         GroupIcon: IconEgg,
         items: [
             { path: '/', label: '홈', Icon: IconHome },
+            { path: '/tutorial', label: '투자 가이드', Icon: IconSchool },
             { path: '/stocks', label: '시세', Icon: IconChartLine },
             { path: '/order', label: '주문', Icon: IconArrowsExchange },
             { path: '/portfolio', label: '내주식', Icon: IconWallet },

@@ -2,10 +2,13 @@ package dev.stocknest.service;
 
 import com.google.gson.*;
 import dev.stocknest.component.CandleDataComponent;
+import dev.stocknest.component.SiseRankComponent;
 import dev.stocknest.component.StockDataComponent;
 import dev.stocknest.model.dto.ChatMessageDTO;
+import dev.stocknest.model.dto.SiseRankDTO;
 import dev.stocknest.model.dto.StockDTO;
 import dev.stocknest.model.dto.StockDetailDTO;
+import dev.stocknest.model.dto.StockRecommendationDTO;
 import dev.stocknest.model.entity.Account;
 import dev.stocknest.model.entity.ChatMessage;
 import dev.stocknest.model.entity.Customer;
@@ -32,6 +35,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -61,6 +65,7 @@ public class ChatbotServiceImpl implements ChatbotService {
     private final TradeHistoryRepository tradeHistoryRepository;
     private final CandleDataComponent candleDataComponent;
     private final StockDataComponent stockDataComponent;
+    private final SiseRankComponent siseRankComponent;
     private final RagService ragService;
 
     // ─── 기존 챗봇 (비스트리밍) ───
@@ -220,8 +225,17 @@ public class ChatbotServiceImpl implements ChatbotService {
         prompt.append("2. **자산 배분 분석** - 예수금 vs 투자금 비율, 종목 집중도\n");
         prompt.append("3. **종목별 평가** - 각 보유 종목의 수익률, 비중\n");
         prompt.append("4. **매매 패턴 분석** - 최근 거래 기반 투자 습관\n");
-        prompt.append("5. **개선 제안** - 리밸런싱, 분산투자, 리스크 관리\n");
-        prompt.append("6. **점수** - 100점 만점 종합 점수와 근거\n\n");
+        prompt.append("5. **리스크 분석** - 포트폴리오 변동성, 집중 위험도, 최대 손실 가능성\n");
+        prompt.append("6. **분산투자 평가** - 종목 수, 섹터 다양성, 시가총액 분포 기반 분산도\n");
+        prompt.append("7. **섹터 분포** - 각 보유 종목의 업종 분류 (IT, 금융, 바이오 등) 및 비중\n");
+        prompt.append("8. **개선 제안** - 리밸런싱, 분산투자, 리스크 관리\n");
+        prompt.append("9. **점수** - 100점 만점 종합 점수와 근거\n\n");
+
+        prompt.append("## 중요: 구조화 데이터 태그\n");
+        prompt.append("리포트 맨 마지막에 반드시 아래 태그를 각각 한 줄씩 포함하세요:\n");
+        prompt.append("[RISK_SCORE:X/10] — 리스크 점수 (1=매우 안전, 10=매우 위험)\n");
+        prompt.append("[DIVERSIFICATION:X/10] — 분산투자 점수 (1=매우 집중, 10=매우 분산)\n");
+        prompt.append("[SECTOR:{\"IT\":30,\"금융\":25,\"바이오\":20,\"기타\":25}] — 섹터별 비중(%) JSON\n\n");
 
         prompt.append("=== 계좌 정보 ===\n");
         if (account != null) {
@@ -313,6 +327,216 @@ public class ChatbotServiceImpl implements ChatbotService {
         JsonArray parts = new JsonArray();
         JsonObject part = new JsonObject();
         part.addProperty("text", "오늘의 마켓 인사이트를 알려줘.");
+        parts.add(part);
+        userContent.add("parts", parts);
+        contents.add(userContent);
+
+        return callGemini(prompt.toString(), contents);
+    }
+
+    // ─── AI 맞춤 종목 추천 ───
+
+    @Override
+    public List<StockRecommendationDTO> generateStockRecommendations(String customerId) {
+        Account account = accountRepository.findByCustomerId(customerId);
+        List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
+        List<TradeHistory> trades = tradeHistoryRepository
+                .findAllByCustomerIdOrderByTradeTimeDesc(customerId);
+        List<SiseRankDTO> rising = siseRankComponent.getRising();
+        List<SiseRankDTO> falling = siseRankComponent.getFalling();
+
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("당신은 한국 주식 시장 전문 AI 애널리스트입니다.\n");
+        prompt.append("사용자의 포트폴리오와 시장 데이터를 분석하여 맞춤 종목 3~5개를 추천하세요.\n");
+        prompt.append("모의투자용이므로 적극적으로 추천해도 됩니다.\n\n");
+        prompt.append("반드시 아래 JSON 형식으로만 응답하세요. 다른 텍스트는 포함하지 마세요.\n");
+        prompt.append("```json\n[\n  {\n    \"stockCode\": \"005930\",\n    \"stockName\": \"삼성전자\",\n");
+        prompt.append("    \"reason\": \"추천 이유 (한국어, 1~2문장)\",\n");
+        prompt.append("    \"confidence\": \"high|medium|low\",\n");
+        prompt.append("    \"action\": \"buy|watch\"\n  }\n]\n```\n\n");
+
+        prompt.append("추천 기준:\n");
+        prompt.append("- 사용자가 이미 보유한 종목은 제외\n");
+        prompt.append("- 사용자의 투자 성향(보유 종목, 매매 패턴) 고려\n");
+        prompt.append("- 현재 시장 급등/급락 종목 중 유망한 것 포함\n");
+        prompt.append("- 분산투자를 위해 다양한 업종에서 추천\n\n");
+
+        prompt.append("=== 사용자 보유 종목 ===\n");
+        if (stocks.isEmpty()) {
+            prompt.append("보유 종목 없음 (초보 투자자 — 안정적인 대형주 위주 추천)\n");
+        } else {
+            for (MyStock s : stocks) {
+                prompt.append("- ").append(s.getStockName()).append("(").append(s.getStockCode()).append(")\n");
+            }
+        }
+
+        if (account != null) {
+            prompt.append("\n가용 예수금: ").append(KRW_FMT.format(account.getDeposit())).append("원\n");
+        }
+
+        prompt.append("\n=== 오늘의 급등 종목 ===\n");
+        rising.stream().limit(10).forEach(r ->
+                prompt.append("- ").append(r.getName()).append("(").append(r.getCode()).append(") ")
+                        .append(r.getPrice()).append("원 ").append(r.getChangeRate()).append("\n"));
+
+        prompt.append("\n=== 오늘의 급락 종목 ===\n");
+        falling.stream().limit(10).forEach(f ->
+                prompt.append("- ").append(f.getName()).append("(").append(f.getCode()).append(") ")
+                        .append(f.getPrice()).append("원 ").append(f.getChangeRate()).append("\n"));
+
+        JsonArray contents = new JsonArray();
+        JsonObject userContent = new JsonObject();
+        userContent.addProperty("role", "user");
+        JsonArray parts = new JsonArray();
+        JsonObject part = new JsonObject();
+        part.addProperty("text", "내 포트폴리오에 맞는 종목을 추천해줘.");
+        parts.add(part);
+        userContent.add("parts", parts);
+        contents.add(userContent);
+
+        String response = callGemini(prompt.toString(), contents);
+        return parseRecommendations(response);
+    }
+
+    private List<StockRecommendationDTO> parseRecommendations(String response) {
+        List<StockRecommendationDTO> result = new ArrayList<>();
+        try {
+            // Extract JSON from markdown code block if present
+            String json = response;
+            if (json.contains("```json")) {
+                json = json.substring(json.indexOf("```json") + 7);
+                json = json.substring(0, json.indexOf("```"));
+            } else if (json.contains("```")) {
+                json = json.substring(json.indexOf("```") + 3);
+                json = json.substring(0, json.indexOf("```"));
+            }
+            json = json.trim();
+
+            JsonArray arr = JsonParser.parseString(json).getAsJsonArray();
+            for (JsonElement el : arr) {
+                JsonObject obj = el.getAsJsonObject();
+                result.add(StockRecommendationDTO.builder()
+                        .stockCode(getJsonStr(obj, "stockCode"))
+                        .stockName(getJsonStr(obj, "stockName"))
+                        .reason(getJsonStr(obj, "reason"))
+                        .confidence(getJsonStr(obj, "confidence"))
+                        .action(getJsonStr(obj, "action"))
+                        .build());
+            }
+        } catch (Exception e) {
+            log.warn("추천 JSON 파싱 실패, raw 텍스트 폴백: {}", e.getMessage());
+            result.add(StockRecommendationDTO.builder()
+                    .stockName("AI 추천")
+                    .reason(response)
+                    .confidence("medium")
+                    .action("watch")
+                    .build());
+        }
+        return result;
+    }
+
+    private String getJsonStr(JsonObject obj, String key) {
+        if (!obj.has(key) || obj.get(key).isJsonNull()) return null;
+        return obj.get(key).getAsString();
+    }
+
+    // ─── AI 시장 브리핑 ───
+
+    @Override
+    public String generateMarketBriefing(String customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("고객을 찾을 수 없습니다."));
+        Account account = accountRepository.findByCustomerId(customerId);
+        List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
+        List<SiseRankDTO> rising = siseRankComponent.getRising();
+        List<SiseRankDTO> falling = siseRankComponent.getFalling();
+
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("당신은 증권사 AI 어드바이저입니다.\n");
+        prompt.append("사용자의 보유 종목과 오늘의 시장 데이터를 기반으로 개인화된 시장 브리핑을 작성하세요.\n");
+        prompt.append("한국어 마크다운 형식, 500~800자, 친근하지만 전문적인 톤으로 작성하세요.\n\n");
+
+        prompt.append("## 브리핑 구성\n");
+        prompt.append("1. **오늘의 시장** - 전체 시장 분위기 (급등/급락 종목 기반으로 유추)\n");
+        prompt.append("2. **내 종목 체크** - 사용자 보유 종목 관련 시장 동향\n");
+        prompt.append("3. **오늘의 관전 포인트** - 오늘 주목할 만한 1가지\n\n");
+
+        prompt.append("=== 사용자: ").append(customer.getName()).append(" ===\n");
+
+        if (!stocks.isEmpty()) {
+            prompt.append("보유 종목: ");
+            prompt.append(stocks.stream().map(s -> s.getStockName() + "(" + s.getStockCode() + ")")
+                    .collect(Collectors.joining(", ")));
+            prompt.append("\n");
+        } else {
+            prompt.append("보유 종목 없음 (초보 투자자)\n");
+        }
+
+        prompt.append("\n=== 오늘의 급등 top 10 ===\n");
+        rising.stream().limit(10).forEach(r ->
+                prompt.append("- ").append(r.getName()).append(" ").append(r.getChangeRate()).append("\n"));
+
+        prompt.append("\n=== 오늘의 급락 top 10 ===\n");
+        falling.stream().limit(10).forEach(f ->
+                prompt.append("- ").append(f.getName()).append(" ").append(f.getChangeRate()).append("\n"));
+
+        JsonArray contents = new JsonArray();
+        JsonObject userContent = new JsonObject();
+        userContent.addProperty("role", "user");
+        JsonArray parts = new JsonArray();
+        JsonObject part = new JsonObject();
+        part.addProperty("text", "오늘의 시장 브리핑을 작성해줘.");
+        parts.add(part);
+        userContent.add("parts", parts);
+        contents.add(userContent);
+
+        return callGemini(prompt.toString(), contents);
+    }
+
+    // ─── AI 매매 신호 ───
+
+    @Override
+    public String generateTradeSignals(String customerId) {
+        List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
+        List<SiseRankDTO> rising = siseRankComponent.getRising();
+        List<SiseRankDTO> falling = siseRankComponent.getFalling();
+
+        if (stocks.isEmpty()) {
+            return "보유 종목이 없어 매매 신호를 생성할 수 없습니다.";
+        }
+
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("당신은 AI 트레이딩 신호 분석가입니다.\n");
+        prompt.append("사용자의 보유 종목을 분석하여 매매 신호를 제공하세요.\n");
+        prompt.append("한국어 마크다운 형식으로, 각 종목별 신호를 작성하세요.\n\n");
+
+        prompt.append("## 각 종목별 형식\n");
+        prompt.append("### 종목명 (종목코드)\n");
+        prompt.append("- **신호**: 추가매수 / 보유유지 / 매도검토\n");
+        prompt.append("- **근거**: 1~2문장\n");
+        prompt.append("- **긴급도**: 일반 / 주의 / 긴급\n\n");
+
+        prompt.append("=== 보유 종목 ===\n");
+        for (MyStock s : stocks) {
+            long avgPrice = s.getAmount() > 0 ? s.getTotalBuyPrice() / s.getAmount() : 0;
+            prompt.append("- ").append(s.getStockName()).append("(").append(s.getStockCode()).append("): ");
+            prompt.append(s.getAmount()).append("주, 평균단가 ").append(KRW_FMT.format(avgPrice)).append("원\n");
+        }
+
+        prompt.append("\n=== 시장 급등 종목 ===\n");
+        rising.stream().limit(5).forEach(r ->
+                prompt.append("- ").append(r.getName()).append(" ").append(r.getChangeRate()).append("\n"));
+
+        prompt.append("\n=== 시장 급락 종목 ===\n");
+        falling.stream().limit(5).forEach(f ->
+                prompt.append("- ").append(f.getName()).append(" ").append(f.getChangeRate()).append("\n"));
+
+        JsonArray contents = new JsonArray();
+        JsonObject userContent = new JsonObject();
+        userContent.addProperty("role", "user");
+        JsonArray parts = new JsonArray();
+        JsonObject part = new JsonObject();
+        part.addProperty("text", "내 보유 종목에 대한 매매 신호를 분석해줘.");
         parts.add(part);
         userContent.add("parts", parts);
         contents.add(userContent);
