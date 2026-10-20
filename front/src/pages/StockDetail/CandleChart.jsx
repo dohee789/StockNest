@@ -187,6 +187,7 @@ const CandleChart = ({ candles }) => {
                 chartRef.current = null;
             }
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [candles, handleCrosshairMove]);
 
     // MA 토글

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { IconTrendingUp, IconTrendingDown, IconCreditCardFilled, IconSparkles, IconX, IconEgg, IconEggCracked } from '@tabler/icons-react';
 import { IconChick, IconChicken } from '../../components/icons/GrowthIcons';
 import Markdown from 'markdown-to-jsx';

@@ -76,6 +76,36 @@ const ChatPanel = ({ onClose }) => {
             const decoder = new TextDecoder();
             let accumulated = '';
 
+            const processLine = (line) => {
+                if (line.startsWith('event:done')) {
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: accumulated,
+                        createdAt: new Date().toISOString(),
+                    }]);
+                    setStreamingText('');
+                    setLoading(false);
+                    return 'done';
+                }
+                if (line.startsWith('event:error')) {
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: '오류가 발생했습니다. 다시 시도해주세요.',
+                        createdAt: new Date().toISOString(),
+                    }]);
+                    setStreamingText('');
+                    setLoading(false);
+                    return 'done';
+                }
+                if (line.startsWith('data:')) {
+                    const data = line.substring(5);
+                    accumulated += data;
+                    setStreamingText(accumulated);
+                }
+                return 'continue';
+            };
+
+            // eslint-disable-next-line no-constant-condition
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
@@ -83,34 +113,11 @@ const ChatPanel = ({ onClose }) => {
                 const chunk = decoder.decode(value, { stream: true });
                 const lines = chunk.split('\n');
 
+                let shouldReturn = false;
                 for (const line of lines) {
-                    if (line.startsWith('event:done')) {
-                        // 스트리밍 완료 → 메시지로 확정
-                        setMessages(prev => [...prev, {
-                            role: 'assistant',
-                            content: accumulated,
-                            createdAt: new Date().toISOString(),
-                        }]);
-                        setStreamingText('');
-                        setLoading(false);
-                        return;
-                    }
-                    if (line.startsWith('event:error')) {
-                        setMessages(prev => [...prev, {
-                            role: 'assistant',
-                            content: '오류가 발생했습니다. 다시 시도해주세요.',
-                            createdAt: new Date().toISOString(),
-                        }]);
-                        setStreamingText('');
-                        setLoading(false);
-                        return;
-                    }
-                    if (line.startsWith('data:')) {
-                        const data = line.substring(5);
-                        accumulated += data;
-                        setStreamingText(accumulated);
-                    }
+                    if (processLine(line) === 'done') { shouldReturn = true; break; }
                 }
+                if (shouldReturn) return;
             }
 
             // 스트림이 끝났는데 done 이벤트가 없었을 경우
