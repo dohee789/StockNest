@@ -104,6 +104,15 @@ public class KrxStockListService {
         return obj.get(key).getAsString().trim();
     }
 
+    public String getNameByCode(String code) {
+        if (code == null) return null;
+        return stocks.stream()
+                .filter(s -> s.getCode().equals(code))
+                .map(StockDTO::getName)
+                .findFirst()
+                .orElse(null);
+    }
+
     public List<StockDTO> search(String keyword) {
         if (keyword == null || keyword.isBlank()) return List.of();
         String kw = keyword.trim();

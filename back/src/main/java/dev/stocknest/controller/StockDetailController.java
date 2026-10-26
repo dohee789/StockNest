@@ -5,6 +5,7 @@ import dev.stocknest.component.StockDataComponent;
 import dev.stocknest.model.dto.CandleDTO;
 import dev.stocknest.model.dto.StockDTO;
 import dev.stocknest.model.dto.StockDetailDTO;
+import dev.stocknest.service.KrxStockListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class StockDetailController {
 
     private final StockDataComponent stockDataComponent;
     private final CandleDataComponent candleDataComponent;
+    private final KrxStockListService krxStockListService;
 
     /**
      * GET /stock-detail/{code}
@@ -46,8 +48,11 @@ public class StockDetailController {
             // 추가 정보 (종목명·거래량·52주 고저·PER/PBR)
             candleDataComponent.enrichStockDetail(detail);
 
-            // Yahoo에서 종목명을 못 가져온 경우 fallback
-            if (detail.getName() == null || detail.getName().isBlank()) {
+            // KRX 한국어 종목명 우선 사용
+            String krxName = krxStockListService.getNameByCode(code);
+            if (krxName != null) {
+                detail.setName(krxName);
+            } else if (detail.getName() == null || detail.getName().isBlank()) {
                 detail.setName(priceInfo != null && priceInfo.getName() != null
                         ? priceInfo.getName() : code);
             }
