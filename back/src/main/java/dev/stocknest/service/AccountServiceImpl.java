@@ -19,8 +19,17 @@ public class AccountServiceImpl implements AccountService {
     private final TradeHistoryRepository tradeHistoryRepository;
 
     @Override
+    @Transactional
     public void insertAccount(AccountDTO dto) {
         Customer customer = customerService.findById(dto.getCustomerId());
+        Account existing = accountRepository.findByCustomerId(dto.getCustomerId());
+        if (existing != null && existing.getSeedMoney() == 0) {
+            existing.setName(dto.getName());
+            existing.setDeposit(dto.getDeposit());
+            existing.setSeedMoney(dto.getSeedMoney());
+            accountRepository.save(existing);
+            return;
+        }
         Account account = Account.builder()
                 .name(dto.getName())
                 .deposit(dto.getDeposit())

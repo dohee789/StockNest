@@ -38,7 +38,7 @@ public class AccountController {
                 .mapToLong(s -> s.getNowPrice() * s.getAmount())
                 .sum();
 
-        if (acc == null) {
+        if (acc == null || acc.getSeedMoney() == 0) {
             return ResponseEntity.status(404).body("계좌가 없습니다");
         }
         return ResponseEntity.ok(AccountDTO.builder()
