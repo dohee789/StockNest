@@ -39,7 +39,7 @@ public class AccountController {
                 .sum();
 
         if (acc == null) {
-            return ResponseEntity.ok(new AccountDTO());
+            return ResponseEntity.status(404).body("계좌가 없습니다");
         }
         return ResponseEntity.ok(AccountDTO.builder()
                 .id(acc.getId())
