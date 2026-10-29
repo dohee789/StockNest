@@ -9,9 +9,9 @@ AI-powered stock trading simulator — built with vibe coding.
 | Backend | Java 17, Spring Boot 3.2, Spring Data JPA, WebSocket STOMP |
 | Frontend | React 18, TradingView lightweight-charts, CSS Modules |
 | AI | Google Gemini LLM (SSE streaming), RAG (ChromaDB + Gemini Embedding) |
-| Database | MySQL 9 |
+| Database | PostgreSQL (Neon serverless) |
 | Automation | n8n (Docker), Scheduled tasks |
-| Data Sources | Yahoo Finance v8, Naver Finance API, KRX |
+| Data Sources | 한국투자증권 Open API, Naver Finance API, KRX |
 
 ## Features
 
@@ -33,7 +33,7 @@ AI-powered stock trading simulator — built with vibe coding.
 ```bash
 # Backend
 cd back
-./mvnw spring-boot:run
+./gradlew bootRun
 
 # Frontend
 cd front
@@ -51,8 +51,8 @@ Browser (React 18)
     +-- REST API / WebSocket / SSE
     |
 Spring Boot 3.2
-    +-- MySQL (JPA)
-    +-- Yahoo Finance / Naver API / KRX
+    +-- PostgreSQL / Neon (JPA)
+    +-- 한국투자증권 Open API / Naver API / KRX
     +-- Gemini API (LLM + Embedding)
     +-- ChromaDB (Vector DB)
     +-- n8n (Webhook automation)

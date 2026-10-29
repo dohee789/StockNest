@@ -34,6 +34,12 @@ rag:
   embedding-model: ${EMBEDDING_MODEL:text-embedding-004}
   top-k: 5
 
+# 한국투자증권 Open API
+kis:
+  app-key: ${KIS_APP_KEY:}
+  app-secret: ${KIS_APP_SECRET:}
+  base-url: https://openapi.koreainvestment.com:9443
+
 logging:
   level:
     dev.stocknest: INFO
